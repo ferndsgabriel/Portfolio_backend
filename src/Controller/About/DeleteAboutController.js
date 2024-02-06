@@ -1,7 +1,7 @@
 const prisma = require("../../prisma");
 
 class DeleteAboutController{
-    async execute(){
+    async execute(req, res){
         const deleteAbout = await prisma.about.deleteMany();
         return res.json({ok:true});
     }

@@ -2,7 +2,6 @@ const prisma = require('../../prisma');
 
 class CreateAboutController{
     async execute(req, res){
-        console.log('init')
         const {Nick, Name, Title, About1, About2, ProfilePhoto  } = req.body;
 
         if (!Nick || !Name || !Title || !About1 || !About2 ){
