@@ -3,15 +3,15 @@ const  {DeletePhoto} = require("../../Middlewares/FirebaseStorageMiddleware");
 
 class DeleteProjectController{
     async execute(req, res){
-        const { Name } = req.body;
+        const { Id } = req.body;
 
-        if (!Name){
-            throw new Error ("Digite o nome.");
+        if (!Id){
+            throw new Error ("Digite o Id.");
         }
 
         const exist = await prisma.projects.findFirst({
             where:{
-                Name:Name
+                Id:Id
             },select:{
                 Image:true
             }
@@ -25,7 +25,7 @@ class DeleteProjectController{
 
         const deleteProject = await prisma.projects.delete({
             where:{
-                Name:Name
+                Id:Id
             }
         });
         DeletePhoto(imgDeleteInFirebase);

@@ -22,15 +22,14 @@ class UpdateSkillsController{
         }
 
         let image = '';
-        try{
+        
+        if (req.file){
             const {firebaseUrl} = req.file;
-            image = firebaseUrl;
-            DeletePhoto(exist.Icon)
-        }catch(err){
-            image = exist.Icon
+            image = firebaseUrl
+        }else{
+            image = exist.Icon;
         }
 
-        console.log(image)
         const updateSkill = await prisma.skills.update({
             where:{
                 Id:Id

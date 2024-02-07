@@ -4,49 +4,48 @@ const {DeletePhoto} = require("../../Middlewares/FirebaseStorageMiddleware");
 
 class UpdateProjectController {
     async execute (req, res) {
-        const {Nick, Name, Title, About1, About2, ProfilePhoto  } = req.body;
+        const {Deploy, Name, GitHub, Description, Id} = req.body;
 
-        if ( !Nick || !Name || !Title || !About1 || !About2 ){
+        if (!Deploy || !Name || !GitHub || !Description || !Id ){
             throw new Error ('Envie todos os campos.');
         }
 
-        const nickExist = await prisma.about.findFirst({
+        const exist = await prisma.projects.findFirst({
             where:{
-                Nick:Nick
+                Id:Id
             },select:{
-                ProfilePhoto:true
+                Image:true
             }
         });
 
-        if (!nickExist){
-            throw new Error ('Este nome de usuário não existe.')
+        if (!exist){
+            throw new Error ('Este projeto não existe.')
         }
 
         let image = '';
-
-        try{
+        
+        if (req.file){
             const {firebaseUrl} = req.file;
-            image = firebaseUrl;
-            DeletePhoto(nickExist.ProfilePhoto)
-        }catch(err){
-            image = nickExist.ProfilePhoto
+            image = firebaseUrl
+        }else{
+            image = exist.Image;
         }
 
 
-        const updateAbout = await prisma.about.update({
+        const updateProject = await prisma.projects.update({
             where:{
-                Nick:Nick
+                Id:Id
             },
             data:{
-                Name,
-                Title,
-                About1,
-                About2,
-                ProfilePhoto:image
+                Deploy:Deploy,
+                Description:Description,
+                GitHub:GitHub,
+                Name:Name,
+                Image:image
             }
         });
 
-        return res.json(updateAbout);
+        return res.json(updateProject);
     }
 } 
 

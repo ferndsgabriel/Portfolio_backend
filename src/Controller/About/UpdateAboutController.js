@@ -23,15 +23,13 @@ class UpdateAboutController {
         }
 
         let image = '';
-
-        try{
+        
+        if (req.file){
             const {firebaseUrl} = req.file;
-            image = firebaseUrl;
-            DeletePhoto(exist.ProfilePhoto)
-        }catch(err){
-            image = exist.ProfilePhoto
+            image = firebaseUrl
+        }else{
+            image = exist.ProfilePhoto;
         }
-
 
         const updateAbout = await prisma.about.update({
             where:{

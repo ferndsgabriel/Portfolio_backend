@@ -10,6 +10,7 @@ const Multer = multer({
 const routerApp = Router();
 
 const {AuthUserController} = require('./Controller/AuthUserController.js');
+const {GetDateController} = require('./Controller/GetDateController.js');
 
 const {CreateAboutController} = require('../src/Controller/About/CreateAboutController.js');
 const {DeleteAboutController} = require('../src/Controller/About/DeleteAboutController.js');
@@ -25,9 +26,11 @@ const {UpdateSkillsController} = require("../src/Controller/Skills/UpdateSkillsC
 
 const {CreateProjectController} = require("../src/Controller/Projects/CreateProjectController.js");
 const {DeleteProjectController} = require("../src/Controller/Projects/DeleteProjectController.js");
+const {UpdateProjectController} = require("../src/Controller/Projects/UpdateProjectController.js");
 
 
 routerApp.post('/auth', new AuthUserController().execute);
+routerApp.get('/date', new GetDateController().execute);
 
 routerApp.post('/about', UserMiddleware, Multer.single('image'), FirebaseStorageMiddlewareInstace, new CreateAboutController().execute);
 routerApp.delete('/about', UserMiddleware, new DeleteAboutController().execute);
@@ -43,10 +46,7 @@ routerApp.put('/skills', UserMiddleware, Multer.single('image'), FirebaseStorage
 
 routerApp.post('/project', UserMiddleware, Multer.single('image'), FirebaseStorageMiddlewareInstace, new CreateProjectController().execute);
 routerApp.delete('/project', UserMiddleware, new DeleteProjectController().execute);
-
-
-
-
+routerApp.put('/project', UserMiddleware, Multer.single('image'), FirebaseStorageMiddlewareInstace, new UpdateProjectController().execute);
 
 
 module.exports = routerApp;
