@@ -40,5 +40,29 @@ function FirebaseStorageMiddleware (){
 }
 
 
-const FirebaseStorageMiddlewareInstace = FirebaseStorageMiddleware()
-module.exports = {FirebaseStorageMiddlewareInstace};
+async function DeletePhoto(fileName) {
+    const [url, firebaseName] = fileName.split('appspot.com/');
+    try {
+        const [files] = await storage.bucket().getFiles();
+
+        for (const file of files) {
+            if (file.name === firebaseName) {
+                await storage.bucket().file(firebaseName).delete();
+                console.log(`Arquivo ${fileName} deletado com sucesso.`);
+                break; 
+            }
+        }
+    } catch (error) {
+        console.error('Erro ao listar ou deletar arquivos:', error);
+    }
+}
+
+
+
+
+const FirebaseStorageMiddlewareInstace = FirebaseStorageMiddleware();
+
+module.exports = {
+    FirebaseStorageMiddlewareInstace,
+    DeletePhoto
+};

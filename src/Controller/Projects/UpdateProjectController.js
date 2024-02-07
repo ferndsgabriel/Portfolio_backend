@@ -2,7 +2,7 @@ const prisma = require("../../prisma");
 const {DeletePhoto} = require("../../Middlewares/FirebaseStorageMiddleware");
 
 
-class UpdateAboutController {
+class UpdateProjectController {
     async execute (req, res) {
         const {Nick, Name, Title, About1, About2, ProfilePhoto  } = req.body;
 
@@ -50,4 +50,4 @@ class UpdateAboutController {
     }
 } 
 
-module.exports = {UpdateAboutController}
+module.exports = {UpdateProjectController}
