@@ -3,15 +3,15 @@ const  {DeletePhoto} = require("../../Middlewares/FirebaseStorageMiddleware");
 
 class DeleteSkillsController{
     async execute(req, res){
-        const { Name } = req.body;
+        const { Id } = req.body;
 
-        if (!Name){
-            throw new Error ("Digite o nome.");
+        if (!Id){
+            throw new Error ("Digite o Id.");
         }
 
         const exist = await prisma.skills.findFirst({
             where:{
-                Name:Name
+                Id:Id
             },select:{
                 Icon:true
             }
@@ -25,7 +25,7 @@ class DeleteSkillsController{
 
         const deleteSkill = await prisma.skills.delete({
             where:{
-                Name:Name
+                Id:Id
             }
         });
         DeletePhoto(iconDeleteInFirebase);

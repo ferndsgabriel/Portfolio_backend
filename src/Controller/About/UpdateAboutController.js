@@ -4,21 +4,21 @@ const {DeletePhoto} = require("../../Middlewares/FirebaseStorageMiddleware");
 
 class UpdateAboutController {
     async execute (req, res) {
-        const {Nick, Name, Title, About1, About2, ProfilePhoto  } = req.body;
+        const {Nick, Name, Title, About1, About2, Id  } = req.body;
 
-        if ( !Nick || !Name || !Title || !About1 || !About2 ){
+        if ( !Nick || !Name || !Title || !About1 || !About2 || !Id){
             throw new Error ('Envie todos os campos.');
         }
 
-        const nickExist = await prisma.about.findFirst({
+        const exist = await prisma.about.findFirst({
             where:{
-                Nick:Nick
+                Id:Id
             },select:{
                 ProfilePhoto:true
             }
         });
 
-        if (!nickExist){
+        if (!exist){
             throw new Error ('Este nome de usuário não existe.')
         }
 
@@ -27,17 +27,18 @@ class UpdateAboutController {
         try{
             const {firebaseUrl} = req.file;
             image = firebaseUrl;
-            DeletePhoto(nickExist.ProfilePhoto)
+            DeletePhoto(exist.ProfilePhoto)
         }catch(err){
-            image = nickExist.ProfilePhoto
+            image = exist.ProfilePhoto
         }
 
 
         const updateAbout = await prisma.about.update({
             where:{
-                Nick:Nick
+                Id:Id
             },
             data:{
+                Nick,
                 Name,
                 Title,
                 About1,

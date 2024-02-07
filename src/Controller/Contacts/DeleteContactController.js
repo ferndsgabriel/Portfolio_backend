@@ -2,15 +2,15 @@ const prisma = require("../../prisma");
 
 class DeleteContactController{
     async execute(req, res){
-        const {Plataform} = req.body;
+        const {Id} = req.body;
 
-        if (!Plataform){
+        if (!Id){
             throw new Error('Digite a plataforma');
         }
 
         const exist = await prisma.contacts.findFirst({
             where:{
-                Plataform:Plataform
+                Id:Id
             }
         });
 
@@ -20,7 +20,7 @@ class DeleteContactController{
         
         const deleteContact = await prisma.contacts.delete({
             where:{
-                Plataform:Plataform
+                Id:Id
             }
         });
 

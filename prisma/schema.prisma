@@ -9,7 +9,8 @@ datasource db {
 }
 
 model About {
-  Nick              String @id
+  Id                String @id @default(uuid())
+  Nick              String
   Name              String    
   Title             String
   About1            String
@@ -18,7 +19,8 @@ model About {
 }
 
 model Projects {
-  Name              String @id
+  Id                String @id @default(uuid())
+  Name              String 
   Image             String
   Deploy            String
   GitHub            String
@@ -26,13 +28,15 @@ model Projects {
 }
 
 model Contacts {
-  Plataform         String @id
+  Id                String @id @default(uuid())
+  Plataform         String 
   Direction         String
   TypePhone         Boolean @default(false)
 }
 
 model Skills {
-  Name              String @id
+  Id                String @id @default(uuid())
+  Name              String 
   Icon              String
 }
 

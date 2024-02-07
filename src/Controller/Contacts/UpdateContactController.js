@@ -2,15 +2,15 @@ const prisma = require("../../prisma");
 
 class UpdateContactController{
     async execute(req, res){
-        const {Plataform, Direction, TypePhone} = req.body;
+        const {Plataform, Direction, TypePhone, Id} = req.body;
 
-        if (!Plataform || !Direction){
+        if (!Plataform || !Direction || !Id) {
             throw new Error('Digite todos os campos');
         }
 
         const exist = await prisma.contacts.findFirst({
             where:{
-                Plataform:Plataform
+                Id:Id
             }
         });
 
@@ -20,10 +20,11 @@ class UpdateContactController{
         
         const updateContact = await prisma.contacts.update({
             where:{
-                Plataform:Plataform
+                Id:Id
             },data:{
                 Direction:Direction,   
-                TypePhone:TypePhone
+                TypePhone:TypePhone,
+                Plataform:Plataform
                 
             }
         });

@@ -21,6 +21,7 @@ const {UpdateContactController} = require("../src/Controller/Contacts/UpdateCont
 
 const {CreateSkillsController} = require("../src/Controller/Skills/CreateSkillsController.js");
 const {DeleteSkillsController} = require("../src/Controller/Skills/DeleteSkillsController.js");
+const {UpdateSkillsController} = require("../src/Controller/Skills/UpdateSkillsController.js");
 
 const {CreateProjectController} = require("../src/Controller/Projects/CreateProjectController.js");
 const {DeleteProjectController} = require("../src/Controller/Projects/DeleteProjectController.js");
@@ -38,6 +39,7 @@ routerApp.put('/contact', UserMiddleware, new UpdateContactController().execute)
 
 routerApp.post('/skills', UserMiddleware, Multer.single('image'), FirebaseStorageMiddlewareInstace, new CreateSkillsController().execute);
 routerApp.delete('/skills', UserMiddleware, new DeleteSkillsController().execute);
+routerApp.put('/skills', UserMiddleware, Multer.single('image'), FirebaseStorageMiddlewareInstace, new UpdateSkillsController().execute);
 
 routerApp.post('/project', UserMiddleware, Multer.single('image'), FirebaseStorageMiddlewareInstace, new CreateProjectController().execute);
 routerApp.delete('/project', UserMiddleware, new DeleteProjectController().execute);
