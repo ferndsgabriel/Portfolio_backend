@@ -4,6 +4,9 @@
   "main": "./src/index.js",
   "author": "Gabriel",
   "license": "MIT",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "start": "nodemon ./src/index.js",
     "build": "prisma generate"
