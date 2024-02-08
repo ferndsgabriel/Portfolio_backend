@@ -29,6 +29,9 @@ const {DeleteProjectController} = require("../src/Controller/Projects/DeleteProj
 const {UpdateProjectController} = require("../src/Controller/Projects/UpdateProjectController.js");
 
 
+routerApp.get('/', ((req, res)=>{
+    res.send({ok:true})
+}))
 routerApp.post('/auth', new AuthUserController().execute);
 routerApp.get('/date', new GetDateController().execute);
 
