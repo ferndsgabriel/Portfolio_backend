@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "nodemon ./src/index.js",
-    "build": "prisma generate"
+    "build": "npx prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.9.1",
