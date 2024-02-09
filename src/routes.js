@@ -31,7 +31,12 @@ const {UpdateProjectController} = require("../src/Controller/Projects/UpdateProj
 
 routerApp.get('/', ((req, res)=>{
     res.send({ok:true})
-}))
+}));
+
+routerApp.get('/login', UserMiddleware, ((req, res)=>{
+    res.send({ok:true})
+}));
+
 routerApp.post('/auth', new AuthUserController().execute);
 routerApp.get('/date', new GetDateController().execute);
 
