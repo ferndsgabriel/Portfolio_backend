@@ -3,7 +3,7 @@ const services = require('../../config/key.json');
 
 admin.initializeApp({
     credential:admin.credential.cert(services),
-    storageBucket:'gs://portfolio-319a3.appspot.com'
+    storageBucket:process.env.BUCKET
 });
 
 const storage = admin.storage();
