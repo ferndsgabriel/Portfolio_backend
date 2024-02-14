@@ -6,7 +6,7 @@ class UpdateAboutController {
     async execute (req, res) {
         const {Nick, Name, Title, About1, About2  } = req.body;
 
-        if ( !Nick || !Name || !Title || !About1 || !About2 || !Id){
+        if ( !Nick || !Name || !Title || !About1 || !About2){
             throw new Error ('Envie todos os campos.');
         }
 
