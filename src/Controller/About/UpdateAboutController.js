@@ -4,17 +4,16 @@ const {DeletePhoto} = require("../../Middlewares/FirebaseStorageMiddleware");
 
 class UpdateAboutController {
     async execute (req, res) {
-        const {Nick, Name, Title, About1, About2, Id  } = req.body;
+        const {Nick, Name, Title, About1, About2  } = req.body;
 
         if ( !Nick || !Name || !Title || !About1 || !About2 || !Id){
             throw new Error ('Envie todos os campos.');
         }
 
         const exist = await prisma.about.findFirst({
-            where:{
-                Id:Id
-            },select:{
-                ProfilePhoto:true
+            select:{
+                ProfilePhoto:true,
+                Id:true
             }
         });
 
@@ -33,7 +32,7 @@ class UpdateAboutController {
 
         const updateAbout = await prisma.about.update({
             where:{
-                Id:Id
+                Id:exist.Id
             },
             data:{
                 Nick,
