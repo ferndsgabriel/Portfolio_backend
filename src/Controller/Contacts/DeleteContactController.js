@@ -5,7 +5,7 @@ class DeleteContactController{
         const {Id} = req.body;
 
         if (!Id){
-            throw new Error('Digite a plataforma');
+            throw new Error("Enter the platform.")
         }
 
         const exist = await prisma.contacts.findFirst({
@@ -15,7 +15,7 @@ class DeleteContactController{
         });
 
         if (!exist){
-            throw new Error ('Plataforma não encontrada.');
+            throw new Error("Platform not found.")
         }
         
         const deleteContact = await prisma.contacts.delete({

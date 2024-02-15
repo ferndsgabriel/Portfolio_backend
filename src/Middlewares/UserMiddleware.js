@@ -13,7 +13,7 @@ async function UserMiddleware(req, res, next){
         const decodedToken = verify(getToken, process.env.JWT_SECRET);
         next();
     } catch(err) {
-        return res.status(401).json({ error: 'Token inválido' });
+        return res.status(401).json({ error: "Invalid token" });
     }
 }
 

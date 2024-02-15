@@ -5,7 +5,7 @@ class UpdateContactController{
         const {Plataform, Direction, TypePhone, Id} = req.body;
 
         if (!Plataform || !Direction || !Id) {
-            throw new Error('Digite todos os campos');
+            throw new Error("Send all fields.")
         }
 
         const exist = await prisma.contacts.findFirst({
@@ -15,7 +15,7 @@ class UpdateContactController{
         });
 
         if (!exist){
-            throw new Error ('Plataforma não encontrada.');
+            throw new Error("Platform not found.")
         }
         
         const updateContact = await prisma.contacts.update({

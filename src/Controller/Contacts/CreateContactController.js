@@ -5,7 +5,7 @@ class CreateContactController{
         const {Plataform, Direction, TypePhone,} = req.body;
 
         if (!Plataform || !Direction){
-            throw new Error('Envie todos os dados!');
+            throw new Error("Send all fields.")
         }
 
         const existOther = await prisma.contacts.findFirst({
@@ -15,7 +15,7 @@ class CreateContactController{
         });
 
         if (existOther){
-            throw new Error ('Está plataforma já existe.');
+            throw new Error("This platform already exists.")
         }
 
 

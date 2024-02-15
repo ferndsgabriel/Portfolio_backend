@@ -6,7 +6,7 @@ class DeleteProjectController{
         const { Id } = req.body;
 
         if (!Id){
-            throw new Error ("Digite o Id.");
+            throw new Error("Enter the ID.")
         }
 
         const exist = await prisma.projects.findFirst({
@@ -18,7 +18,7 @@ class DeleteProjectController{
         });
         
         if (!exist){
-            throw new Error('Projeto não econtrado.')
+            throw new Error("Project not found.")
         }
 
         const imgDeleteInFirebase = exist.Image;

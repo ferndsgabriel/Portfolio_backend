@@ -5,7 +5,7 @@ class CreateAboutController{
         const {Nick, Name, Title, About1, About2, ProfilePhoto  } = req.body;
 
         if (!Nick || !Name || !Title || !About1 || !About2 ){
-            throw new Error ('Envie todos os campos.');
+            throw new Error("Send all fields.")
         }
 
         const nickExist = await prisma.about.findFirst({
@@ -15,13 +15,13 @@ class CreateAboutController{
         });
 
         if (nickExist){
-            throw new Error ('Este nome de usuário já existe.')
+            throw new Error("This username already exists.")
         }
 
         const {firebaseUrl} = req.file;
 
         if (!firebaseUrl){
-            throw new Error ('Imagem não encontrada.')
+            throw new Error("Image not found.")
         }
 
         const image = firebaseUrl;

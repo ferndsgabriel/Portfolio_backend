@@ -6,13 +6,13 @@ class AuthUserController {
         const {pass} = req.body;
 
         if (!pass){
-            throw new Error ('Digite a senha.');
+            throw new Error("Enter the password.")
         }
 
         const comparePass = await compare(pass, process.env.PASS);
 
         if (!comparePass){
-            throw new Error('Senha inválida.');
+            throw new Error("Invalid password.")
         }
 
         const token = sign({}, process.env.JWT_SECRET, {

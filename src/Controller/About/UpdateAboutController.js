@@ -7,7 +7,7 @@ class UpdateAboutController {
         const {Nick, Name, Title, About1, About2  } = req.body;
 
         if ( !Nick || !Name || !Title || !About1 || !About2){
-            throw new Error ('Envie todos os campos.');
+            throw new Error("Send all fields.")
         }
 
         const exist = await prisma.about.findFirst({
@@ -18,7 +18,7 @@ class UpdateAboutController {
         });
 
         if (!exist){
-            throw new Error ('Este nome de usuário não existe.')
+            throw new Error("This username does not exist.")
         }
 
         let image = '';

@@ -7,7 +7,7 @@ class UpdateProjectController {
         const {Deploy, Name, GitHub, Description, Id} = req.body;
 
         if (!Deploy || !Name || !GitHub || !Description || !Id ){
-            throw new Error ('Envie todos os campos.');
+            throw new Error("Send all fields.")
         }
 
         const exist = await prisma.projects.findFirst({
@@ -19,7 +19,7 @@ class UpdateProjectController {
         });
 
         if (!exist){
-            throw new Error ('Este projeto não existe.')
+            throw new Error("Platform not found.")
         }
 
         let image = '';

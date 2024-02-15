@@ -50,12 +50,13 @@ async function DeletePhoto(fileName) {
         for (const file of files) {
             if (file.name === firebaseName) {
                 await storage.bucket().file(firebaseName).delete();
-                console.log(`Arquivo ${fileName} deletado com sucesso.`);
+                console.log(`File ${fileName} in trash.`);
                 break; 
             }
         }
     } catch (error) {
-        console.error('Erro ao listar ou deletar arquivos:', error);
+        console.error("Error listing or deleting files:", error);
+
     }
 }
 

@@ -5,7 +5,7 @@ class CreateProjectController{
         const {Deploy, Name, GitHub, Description} = req.body;
 
         if (!Deploy || !Name || !GitHub || !Description ){
-            throw new Error ('Envie todos os campos.');
+            throw new Error("Send all fields.")
         }
 
         const projectExist = await prisma.projects.findFirst({
@@ -15,7 +15,7 @@ class CreateProjectController{
         });
 
         if (projectExist){
-            throw new Error ('Este projeto já existe.')
+            throw new Error("This project already exists.")
         }
 
         let image = '';
@@ -28,7 +28,7 @@ class CreateProjectController{
         }
 
         if (image === ''){
-            throw new Error ('Imagem não encontrada.')
+            throw new Error("Image not found.")
         }
 
         const createProject = await prisma.projects.create({
