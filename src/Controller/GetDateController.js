@@ -5,7 +5,9 @@ class GetDateController{
         const about = await prisma.about.findFirst();
         const contacts = await prisma.contacts.findMany();
         const skills = await prisma.skills.findMany();
-        const projects = await prisma.projects.findMany();
+        const projects = await prisma.projects.findMany({
+            orderBy:'desc'
+        });
 
         return res.json({About:about, Contacts:contacts, Skills:skills, Projects:projects });
     }
